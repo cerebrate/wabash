@@ -33,10 +33,10 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.iconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mniOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniPing = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.mniExit = new System.Windows.Forms.ToolStripMenuItem();
             this.logBox = new System.Windows.Forms.ListBox();
-            this.mniPing = new System.Windows.Forms.ToolStripMenuItem();
             this.iconMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,25 +56,32 @@
             this.mnsSeparator,
             this.mniExit});
             this.iconMenu.Name = "iconMenu";
-            this.iconMenu.Size = new System.Drawing.Size(153, 98);
+            this.iconMenu.Size = new System.Drawing.Size(146, 76);
             // 
             // mniOpen
             // 
             this.mniOpen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mniOpen.Name = "mniOpen";
-            this.mniOpen.Size = new System.Drawing.Size(152, 22);
+            this.mniOpen.Size = new System.Drawing.Size(145, 22);
             this.mniOpen.Text = "&Open";
             this.mniOpen.Click += new System.EventHandler(this.mniOpen_Click);
+            // 
+            // mniPing
+            // 
+            this.mniPing.Name = "mniPing";
+            this.mniPing.Size = new System.Drawing.Size(145, 22);
+            this.mniPing.Text = "&Ping daemon";
+            this.mniPing.Click += new System.EventHandler(this.mniPing_Click);
             // 
             // mnsSeparator
             // 
             this.mnsSeparator.Name = "mnsSeparator";
-            this.mnsSeparator.Size = new System.Drawing.Size(149, 6);
+            this.mnsSeparator.Size = new System.Drawing.Size(142, 6);
             // 
             // mniExit
             // 
             this.mniExit.Name = "mniExit";
-            this.mniExit.Size = new System.Drawing.Size(152, 22);
+            this.mniExit.Size = new System.Drawing.Size(145, 22);
             this.mniExit.Text = "E&xit";
             this.mniExit.Click += new System.EventHandler(this.mniExit_Click);
             // 
@@ -89,13 +96,6 @@
             this.logBox.Size = new System.Drawing.Size(440, 173);
             this.logBox.TabIndex = 0;
             // 
-            // mniPing
-            // 
-            this.mniPing.Name = "mniPing";
-            this.mniPing.Size = new System.Drawing.Size(152, 22);
-            this.mniPing.Text = "&Ping daemon";
-            this.mniPing.Click += new System.EventHandler(this.mniPing_Click);
-            // 
             // Wabash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,9 +108,11 @@
             this.MaximumSize = new System.Drawing.Size(480, 240);
             this.MinimizeBox = false;
             this.Name = "Wabash";
+            this.ShowInTaskbar = false;
             this.Text = "Wabash";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Wabash_FormClosing);
             this.Load += new System.EventHandler(this.Wabash_Load);
+            this.Shown += new System.EventHandler(this.Wabash_Shown);
             this.VisibleChanged += new System.EventHandler(this.Wabash_VisibleChanged);
             this.iconMenu.ResumeLayout(false);
             this.ResumeLayout(false);

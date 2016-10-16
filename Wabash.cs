@@ -52,7 +52,7 @@ namespace ArkaneSystems.Wabash
 
         private void Wabash_VisibleChanged(object sender, EventArgs e) => this.mniOpen.Enabled = !this.Visible ;
 
-        private void Wabash_Load(object sender, EventArgs e) => this.daemon.Start() ;
+        private void Wabash_Load (object sender, EventArgs e) => this.daemon.Start () ;
 
         private void mniPing_Click(object sender, EventArgs e) => this.daemon.Ping();
 
@@ -97,5 +97,7 @@ kill -TERM <pid>" ;
             this.allowClosing = true;
             this.Close();
         }
+
+        private void Wabash_Shown(object sender, EventArgs e) => this.Hide () ;
     }
 }
