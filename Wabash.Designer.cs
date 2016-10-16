@@ -1,6 +1,6 @@
 ﻿namespace Wabash
 {
-    partial class Form1
+    partial class Wabash
     {
         /// <summary>
         /// Required designer variable.

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Wabash
 {
-    public partial class Form1 : Form
+    public partial class Wabash : Form
     {
-        public Form1()
+        public Wabash()
         {
             InitializeComponent();
         }
