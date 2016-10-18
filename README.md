@@ -1,5 +1,7 @@
 # wabash
 
+[![Join the chat at https://gitter.im/wabash-wsl/Lobby](https://badges.gitter.im/wabash-wsl/Lobby.svg)](https://gitter.im/wabash-wsl/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A utility to hold a WSL session-set open continuously. Works in conjunction with wabashd.
 
 So, you want to keep daemons or disowned processes running under Windows Services for Linux even without a bash console open? Well, look no further, friends and users, because wabash is here to help, a simple utility which keeps the WSL session going in the background all the time.
