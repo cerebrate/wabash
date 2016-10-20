@@ -4,6 +4,7 @@ using System.IO ;
 using System.Threading ;
 using System.Threading.Tasks ;
 
+using PostSharp.Aspects.Advices ;
 using PostSharp.Patterns.Model ;
 using PostSharp.Patterns.Threading ;
 
@@ -60,6 +61,14 @@ namespace ArkaneSystems.Wabash
                                               RedirectStandardInput = true,
                                               RedirectStandardOutput = true
                                           }) ;
+
+            Thread.Sleep(500);
+
+            if (this.wabashd.HasExited)
+            {
+                this.owner.Die("Could not start wabashd. Is it already running? If not, is an old lock file (/tmp/wabashd.exe.lock) present?");
+                return ;
+            }
 
             // Start the reader loop listener.
             this.InputReader (this.wabashd.StandardOutput) ;
