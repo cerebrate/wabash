@@ -1,10 +1,8 @@
-# wabash
-
 [![Join the chat at https://gitter.im/wabash-wsl/Lobby](https://badges.gitter.im/wabash-wsl/Lobby.svg)](https://gitter.im/wabash-wsl/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A utility to hold a WSL session-set open continuously. Works in conjunction with wabashd.
 
-So, you want to keep daemons or disowned processes running under Windows Services for Linux even without a bash console open? Well, look no further, friends and users, because wabash is here to help, a simple utility which keeps the WSL session going in the background all the time.
+So, you want to keep daemons or disowned processes running under Windows Services for Linux even without a bash console open? Well, look no further, friends and users, because wabash is here to help, a simple utility which keeps the WSL session going in the background all the time. It is also capable (0.5.2 and later) of automatically starting any system services/daemons capable of being started by *service(8)*.
 
 ## DISCLAIMER
 
@@ -18,9 +16,37 @@ First, download the release file, and unzip it into a permanent home somewhere o
 
 Then, go to that directory from a WSL shell, and run:
 
-    sudo dpkg -i wabashd_1_wsl.deb
+    sudo dpkg -i wabashd_2_wsl.deb
     
-to install the wabashd pseudo-daemon. This works together with wabash.exe for Windows to keep your WSL session going. If that's not installed, wabash plain won't work. Once the package is installed, though, that's it.
+to install the wabashd pseudo-daemon. This works together with wabash.exe for Windows to keep your WSL session going. If that's not installed, wabash plain won't work. **Note that if you have been using a previous version of wabash using wabashd version 1, you must update to the supplied latest version of the .deb package.**
+
+If you intend to use the service-starting functionality of wabashd, you must edit your /etc/sudoers file with _visudo_ , to include the line: 
+
+    ALL ALL = (root) NOPASSWD: /usr/sbin/service
+
+This permits wabashd to start the services as root without you having to type the root password in an otherwise unaccessible tty.
+
+## Starting services
+
+The services started by wabashd are defined in the wabashd.exe.config file in the same folder as wabashd.exe, in the following section:
+
+    <applicationSettings>
+      <ArkaneSystems.Wabash.Properties.Settings>
+        <setting name="Services" serializeAs="Xml">
+          <value>
+            <ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+              <string>rsyslog</string>
+              <string>binfmt-support</string>
+              <string>dbus</string>
+              <string>cron</string>
+              <string>atd</string>
+            </ArrayOfString>
+          </value>
+        </setting>
+      </ArkaneSystems.Wabash.Properties.Settings>
+    </applicationSettings>
+
+By default, it will start rsyslog, binfmt-support, dbus, cron, and atd - you can comment out or delete any or all of these, or add other services, using the name required by the service command, in the same format, i.e. _<string>servicename</string>_.
 
 ## Usage
 
@@ -28,7 +54,7 @@ Run wabash.exe, which runs as a little orange icon down in your notification are
 
     Wabash: 0 sessions / 0 daemons
     
-"sessions" is the number of WSL consoles you currently have open (technically, the number of "init" processes which are children of the initial pid 1 init, which should be everything you started with bash.exe); "daemons" is the number of children of pid 1 that _aren't_ more inits, which should be all the daemons and any disowned processes.
+"sessions" is the number of WSL consoles you currently have open (technically, the number of "init" processes which are children of the initial pid 1 init, which should be everything you started with bash.exe); "daemons" is the number of children of pid 1 that _aren't_ more inits, which should be all the daemons (such as automatically started services) and any disowned processes.
 
 You can open wabash if you like, from its right-click menu or by double-clicking the notification icon, but all its window contains at the moment is the stream of raw update messages sent by wabashd, which are very likely of little interest. You can also ping the daemon from the right-click menu if you just want to double-check that the communications are going on correctly.
 
