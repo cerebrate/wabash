@@ -19,6 +19,8 @@ using System.IO ;
 using System.Threading ;
 using System.Threading.Tasks ;
 
+using ArkaneSystems.Wabash.Properties ;
+
 using PostSharp.Patterns.Model ;
 using PostSharp.Patterns.Threading ;
 
@@ -92,6 +94,19 @@ namespace ArkaneSystems.Wabash
 
             // Set the channel.
             this.channel = this.wabashd.StandardInput ;
+
+            // Fire up the server-starter loop.
+            this.StartServices () ;
+        }
+
+        [Background]
+        private void StartServices ()
+        {
+            foreach (string service in Settings.Default.Services)
+            {
+                this.channel.WriteLine ($"strt {service}") ;
+                Thread.Sleep(250);
+            }
         }
 
         // Stop the daemon.
