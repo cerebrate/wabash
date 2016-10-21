@@ -24,14 +24,13 @@ namespace ArkaneSystems.Wabash
 {
     public partial class Wabash : Form
     {
-        private DaemonManager daemon ;
-
         private bool allowClosing ;
+        private readonly DaemonManager daemon ;
 
         public Wabash ()
         {
             this.InitializeComponent () ;
-            this.daemon = new DaemonManager(this);
+            this.daemon = new DaemonManager (this) ;
         }
 
         private void Wabash_FormClosing (object sender, FormClosingEventArgs e)
@@ -50,30 +49,31 @@ namespace ArkaneSystems.Wabash
 
         private void mniExit_Click (object sender, EventArgs e) => this.daemon.Stop () ;
 
-        private void Wabash_VisibleChanged(object sender, EventArgs e) => this.mniOpen.Enabled = !this.Visible ;
+        private void Wabash_VisibleChanged (object sender, EventArgs e) => this.mniOpen.Enabled = !this.Visible ;
 
         private void Wabash_Load (object sender, EventArgs e) => this.daemon.Start () ;
 
-        private void mniPing_Click(object sender, EventArgs e) => this.daemon.Ping();
+        private void mniPing_Click (object sender, EventArgs e) => this.daemon.Ping () ;
 
         [Dispatched (true)]
         public void WriteLogString (string text)
         {
             // Trim list box if necessary.
             if (this.logBox.Items.Count == 1000)
-                this.logBox.Items.RemoveAt(999);
+                this.logBox.Items.RemoveAt (999) ;
 
             // Timestamp the message and add it.
-            this.logBox.Items.Insert(0, $"{DateTime.Now:T}: {text}");
+            this.logBox.Items.Insert (0, $"{DateTime.Now:T}: {text}") ;
         }
 
         [Dispatched (true)]
-        public void Message (string message) => MessageBox.Show (this, message, "Wabash", MessageBoxButtons.OK, MessageBoxIcon.Information) ;
+        public void Message (string message)
+            => this.notifyIcon.ShowBalloonTip (1000, "Wabash", message, ToolTipIcon.Info) ;
 
         [Dispatched (true)]
         public void Die (string error)
         {
-            var message = $@"{error}
+            string message = $@"{error}
 
 Terminating. wabashd may need to be terminated separately; if so, use:
 
@@ -94,10 +94,10 @@ kill -TERM <pid>" ;
         [Dispatched (true)]
         public void Exit ()
         {
-            this.allowClosing = true;
-            this.Close();
+            this.allowClosing = true ;
+            this.Close () ;
         }
 
-        private void Wabash_Shown(object sender, EventArgs e) => this.Hide () ;
+        private void Wabash_Shown (object sender, EventArgs e) => this.Hide () ;
     }
 }
