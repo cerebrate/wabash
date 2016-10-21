@@ -46,7 +46,7 @@ The services started by wabashd are defined in the wabashd.exe.config file in th
       </ArkaneSystems.Wabash.Properties.Settings>
     </applicationSettings>
 
-By default, it will start rsyslog, binfmt-support, dbus, cron, and atd - you can comment out or delete any or all of these, or add other services, using the name required by the service command, in the same format, i.e. _<string>servicename</string>_.
+By default, it will start rsyslog, binfmt-support, dbus, cron, and atd - you can comment out or delete any or all of these, or add other services, using the name required by the service command, in the same format.
 
 ## Usage
 
