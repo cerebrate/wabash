@@ -20,7 +20,8 @@ Then, go to that directory from a WSL shell, and run:
     
 to install the wabashd pseudo-daemon. This works together with wabash.exe for Windows to keep your WSL session going. If that's not installed, wabash plain won't work. **Note that if you have been using a previous version of wabash using wabashd version 1, you must update to the supplied latest version of the .deb package.**
 
-If you intend to use the service-starting functionality of wabashd, you must edit your /etc/sudoers file with _visudo_ , to include the line: 
+
+## WIf you intend to use the service-starting functionality of wabashd, you must edit your /etc/sudoers file with _visudo_ , to include the line: 
 
     ALL ALL = (root) NOPASSWD: /usr/sbin/service
 
@@ -69,3 +70,9 @@ If you need to kill wabash from Task Manager or otherwise terminate it without g
 Also, while this pre-release will let you, you cannot run more than one wabash at once; all but the first will fail to start properly and can't be quit from the menu. You'll have to kill them in Task Manager, kill the wabashd if it's still running, then restart one and only one.
 
 Enjoy!
+
+## Wabashd
+
+Source code for the daemon half of wabash is kept in a separate repository here:
+
+https://github.com/cerebrate/wabashd
