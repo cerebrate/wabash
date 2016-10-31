@@ -143,7 +143,7 @@ kill -TERM <pid>" ;
                                                                                                       .System),
                                                                 Wabash.WslProcess),
                 Arguments = $"~ -c \"{this.Shell} -l\"",
-                UseShellExecute = true
+                UseShellExecute = false
             });
         }
     }
