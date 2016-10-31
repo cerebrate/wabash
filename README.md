@@ -4,6 +4,12 @@ A utility to hold a WSL session-set open continuously. Works in conjunction with
 
 So, you want to keep daemons or disowned processes running under Windows Services for Linux even without a bash console open? Well, look no further, friends and users, because wabash is here to help, a simple utility which keeps the WSL session going in the background all the time. It is also capable (0.5.2 and later) of automatically starting any system services/daemons capable of being started by *service(8)*.
 
+If you enjoy it, consider sending me a buckazoid or two to encourage me to keep developing it:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D4PYD8FWKWR8N)
+
+[I also accept cryptocurrencies!](https://freewallet.org/id/cerebrate/btc)
+
 ## DISCLAIMER
 
 At present this is BETA SOFTWARE. It still has rough edges. Be prepared for those. Don't complain, just send issues to this github. Or pull requests, if you prefer.
