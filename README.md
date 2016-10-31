@@ -18,9 +18,12 @@ At present this is BETA SOFTWARE. It still has rough edges. Be prepared for thos
 
 The installation comes in two stages:
 
-First, download the release file, and unzip it into a permanent home somewhere on your hard drive, accessible from WSL.
+First, either
 
-Then, go to that directory from a WSL shell, and run:
+ * download the release file, and unzip it into a permanent home somewhere on your hard drive, accessible from WSL; OR
+ * Install the _wabash_ package using [chocolatey](http://chocolatey.org).
+
+Then, go to the wabash directory (in the case of a chocolatey install, this is _ProgramData\chocolatey\lib\wabash\tools_ ) from a WSL shell, and run:
 
     sudo dpkg -i wabashd_4_wsl.deb
     
