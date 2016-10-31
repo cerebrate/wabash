@@ -18,6 +18,8 @@ using System.Diagnostics ;
 using System.IO ;
 using System.Windows.Forms ;
 
+using Microsoft.Win32 ;
+
 using PostSharp.Patterns.Threading ;
 
 #endregion
@@ -26,12 +28,20 @@ namespace ArkaneSystems.Wabash
 {
     public sealed partial class Wabash : Form
     {
-        private const string WslProcess = @"bash.exe";
+        private const string WslProcess = @"bash.exe" ;
+        private const string AppName = @"ArkaneSystems.Wabash" ;
+        private const string StartupKeyName = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run" ;
+        private readonly DaemonManager daemon ;
 
         private bool allowClosing ;
-        private readonly DaemonManager daemon ;
-        private string shell = null ;
-        private object shellLock = new object () ;
+        private string shell ;
+        private readonly object shellLock = new object () ;
+
+        public Wabash ()
+        {
+            this.InitializeComponent () ;
+            this.daemon = new DaemonManager (this) ;
+        }
 
         public string Shell
         {
@@ -52,12 +62,6 @@ namespace ArkaneSystems.Wabash
             }
         }
 
-        public Wabash ()
-        {
-            this.InitializeComponent () ;
-            this.daemon = new DaemonManager (this) ;
-        }
-
         private void Wabash_FormClosing (object sender, FormClosingEventArgs e)
         {
             if (!this.allowClosing)
@@ -70,7 +74,7 @@ namespace ArkaneSystems.Wabash
 
         private void notifyIcon_MouseDoubleClick (object sender, MouseEventArgs e) => this.OpenShell () ;
 
-        private void mniShell_Click(object sender, EventArgs e) => this.OpenShell() ;
+        private void mniShell_Click (object sender, EventArgs e) => this.OpenShell () ;
 
         private void mniOpen_Click (object sender, EventArgs e) => this.Show () ;
 
@@ -78,7 +82,20 @@ namespace ArkaneSystems.Wabash
 
         private void Wabash_VisibleChanged (object sender, EventArgs e) => this.mniOpen.Enabled = !this.Visible ;
 
-        private void Wabash_Load (object sender, EventArgs e) => this.daemon.Start () ;
+        private void Wabash_Load (object sender, EventArgs e)
+        {
+            // Set the run-on-starup menu item.
+            using (RegistryKey rk = Registry.CurrentUser.OpenSubKey (Wabash.StartupKeyName))
+            {
+                if (rk.GetValue (Wabash.AppName) != null)
+                {
+                    this.mniStartup.Checked = true ;
+                }
+            }
+
+            // Start the daemon
+            this.daemon.Start () ;
+        }
 
         private void mniPing_Click (object sender, EventArgs e) => this.daemon.Ping () ;
 
@@ -134,17 +151,35 @@ kill -TERM <pid>" ;
                 return ;
 
             // Start the shell process.
-            Process.Start(new ProcessStartInfo
+            Process.Start (new ProcessStartInfo
+                           {
+                               FileName =
+                                   Path.Combine (
+                                                 Environment.GetFolderPath (
+                                                                            Environment.SpecialFolder
+                                                                                       .System),
+                                                 Wabash.WslProcess),
+                               Arguments = $"~ -c \"{this.Shell} -l\"",
+                               UseShellExecute = false
+                           }) ;
+        }
+
+        private void mniStartup_CheckedChanged(object sender, EventArgs e)
+        {
+            // Change run-on-startup state.
+            using (RegistryKey rk = Registry.CurrentUser.OpenSubKey(Wabash.StartupKeyName, true))
             {
-                FileName =
-                                                  Path.Combine(
-                                                                Environment.GetFolderPath(
-                                                                                           Environment.SpecialFolder
-                                                                                                      .System),
-                                                                Wabash.WslProcess),
-                Arguments = $"~ -c \"{this.Shell} -l\"",
-                UseShellExecute = false
-            });
+                if (this.mniStartup.Checked)
+                {
+                    // enable
+                    rk.SetValue (Wabash.AppName, $"\"{Application.ExecutablePath.ToString()}\"", RegistryValueKind.String);
+                }
+                else
+                {
+                    // disable
+                    rk.DeleteValue (Wabash.AppName, false) ;
+                }
+            }
         }
     }
 }

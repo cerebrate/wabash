@@ -29,18 +29,38 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ToolStripSeparator mnsSeparator2;
+            System.Windows.Forms.ToolStripSeparator mnsSeparator;
+            System.Windows.Forms.ToolStripSeparator mnsSeparator3;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Wabash));
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.iconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mniShell = new System.Windows.Forms.ToolStripMenuItem();
             this.mniOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.mniPing = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnsSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.mniStartup = new System.Windows.Forms.ToolStripMenuItem();
             this.mniExit = new System.Windows.Forms.ToolStripMenuItem();
             this.logBox = new System.Windows.Forms.ListBox();
-            this.mnsSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mniShell = new System.Windows.Forms.ToolStripMenuItem();
+            mnsSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            mnsSeparator = new System.Windows.Forms.ToolStripSeparator();
+            mnsSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.iconMenu.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // mnsSeparator2
+            // 
+            mnsSeparator2.Name = "mnsSeparator2";
+            mnsSeparator2.Size = new System.Drawing.Size(145, 6);
+            // 
+            // mnsSeparator
+            // 
+            mnsSeparator.Name = "mnsSeparator";
+            mnsSeparator.Size = new System.Drawing.Size(145, 6);
+            // 
+            // mnsSeparator3
+            // 
+            mnsSeparator3.Name = "mnsSeparator3";
+            mnsSeparator3.Size = new System.Drawing.Size(145, 6);
             // 
             // notifyIcon
             // 
@@ -54,38 +74,52 @@
             // 
             this.iconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mniShell,
-            this.mnsSeparator2,
+            mnsSeparator2,
             this.mniOpen,
             this.mniPing,
-            this.mnsSeparator,
+            mnsSeparator,
+            this.mniStartup,
+            mnsSeparator3,
             this.mniExit});
             this.iconMenu.Name = "iconMenu";
-            this.iconMenu.Size = new System.Drawing.Size(153, 126);
+            this.iconMenu.Size = new System.Drawing.Size(149, 132);
+            // 
+            // mniShell
+            // 
+            this.mniShell.Enabled = false;
+            this.mniShell.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.mniShell.Name = "mniShell";
+            this.mniShell.Size = new System.Drawing.Size(148, 22);
+            this.mniShell.Text = "Open &shell";
+            this.mniShell.Click += new System.EventHandler(this.mniShell_Click);
             // 
             // mniOpen
             // 
             this.mniOpen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mniOpen.Name = "mniOpen";
-            this.mniOpen.Size = new System.Drawing.Size(152, 22);
+            this.mniOpen.Size = new System.Drawing.Size(148, 22);
             this.mniOpen.Text = "Open &log";
             this.mniOpen.Click += new System.EventHandler(this.mniOpen_Click);
             // 
             // mniPing
             // 
             this.mniPing.Name = "mniPing";
-            this.mniPing.Size = new System.Drawing.Size(152, 22);
+            this.mniPing.Size = new System.Drawing.Size(148, 22);
             this.mniPing.Text = "&Ping daemon";
             this.mniPing.Click += new System.EventHandler(this.mniPing_Click);
             // 
-            // mnsSeparator
+            // mniStartup
             // 
-            this.mnsSeparator.Name = "mnsSeparator";
-            this.mnsSeparator.Size = new System.Drawing.Size(149, 6);
+            this.mniStartup.CheckOnClick = true;
+            this.mniStartup.Name = "mniStartup";
+            this.mniStartup.Size = new System.Drawing.Size(148, 22);
+            this.mniStartup.Text = "Run at startup";
+            this.mniStartup.CheckedChanged += new System.EventHandler(this.mniStartup_CheckedChanged);
             // 
             // mniExit
             // 
             this.mniExit.Name = "mniExit";
-            this.mniExit.Size = new System.Drawing.Size(152, 22);
+            this.mniExit.Size = new System.Drawing.Size(148, 22);
             this.mniExit.Text = "E&xit";
             this.mniExit.Click += new System.EventHandler(this.mniExit_Click);
             // 
@@ -99,20 +133,6 @@
             this.logBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.logBox.Size = new System.Drawing.Size(440, 173);
             this.logBox.TabIndex = 0;
-            // 
-            // mnsSeparator2
-            // 
-            this.mnsSeparator2.Name = "mnsSeparator2";
-            this.mnsSeparator2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // mniShell
-            // 
-            this.mniShell.Enabled = false;
-            this.mniShell.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.mniShell.Name = "mniShell";
-            this.mniShell.Size = new System.Drawing.Size(152, 22);
-            this.mniShell.Text = "Open &shell";
-            this.mniShell.Click += new System.EventHandler(this.mniShell_Click);
             // 
             // Wabash
             // 
@@ -143,11 +163,10 @@
         private System.Windows.Forms.ListBox logBox;
         private System.Windows.Forms.ContextMenuStrip iconMenu;
         private System.Windows.Forms.ToolStripMenuItem mniOpen;
-        private System.Windows.Forms.ToolStripSeparator mnsSeparator;
         private System.Windows.Forms.ToolStripMenuItem mniExit;
         private System.Windows.Forms.ToolStripMenuItem mniPing;
         private System.Windows.Forms.ToolStripMenuItem mniShell;
-        private System.Windows.Forms.ToolStripSeparator mnsSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mniStartup;
     }
 }
 
