@@ -22,6 +22,8 @@ namespace ArkaneSystems.Wabash
 {
     static class Program
     {
+        private static SingleInstance instance;
+
         /// <summary>
         ///     The main entry point for the application.
         /// </summary>
@@ -30,7 +32,12 @@ namespace ArkaneSystems.Wabash
         {
             Application.EnableVisualStyles () ;
             Application.SetCompatibleTextRenderingDefault (false) ;
+
+            Program.instance = new SingleInstance();
+
             Application.Run (new Wabash ()) ;
+
+            Program.instance.Dispose();
         }
     }
 }

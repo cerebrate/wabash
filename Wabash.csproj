@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="DaemonManager.cs" />
     <Compile Include="GlobalAspects.cs" />
+    <Compile Include="SingleInstance.cs" />
     <Compile Include="Wabash.cs">
       <SubType>Form</SubType>
     </Compile>
