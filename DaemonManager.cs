@@ -47,7 +47,7 @@ namespace ArkaneSystems.Wabash
         private const string WslProcess = @"bash.exe" ;
         private const string WslArguments = @"-c /usr/bin/start-wabashd" ;
 
-        private const int CompatibleDaemonVersion = 2 ;
+        private const int CompatibleDaemonVersion = 4 ;
 
         [Reference]
         private readonly Wabash owner ;
@@ -176,6 +176,11 @@ namespace ArkaneSystems.Wabash
                     case "svup":
                         // service start response
                         this.owner.Message (recv.Remove (0, 5)) ;
+                        break ;
+
+                    case "shel":
+                        // Shell identification
+                        this.owner.Shell = split[1] ;
                         break ;
 
                     default:

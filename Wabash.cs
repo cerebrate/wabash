@@ -14,6 +14,8 @@
 #region using
 
 using System ;
+using System.Diagnostics ;
+using System.IO ;
 using System.Windows.Forms ;
 
 using PostSharp.Patterns.Threading ;
@@ -22,10 +24,33 @@ using PostSharp.Patterns.Threading ;
 
 namespace ArkaneSystems.Wabash
 {
-    public partial class Wabash : Form
+    public sealed partial class Wabash : Form
     {
+        private const string WslProcess = @"bash.exe";
+
         private bool allowClosing ;
         private readonly DaemonManager daemon ;
+        private string shell = null ;
+        private object shellLock = new object () ;
+
+        public string Shell
+        {
+            get
+            {
+                lock (this.shellLock)
+                {
+                    return this.shell ;
+                }
+            }
+            set
+            {
+                lock (this.shellLock)
+                {
+                    this.shell = value ;
+                    this.mniShell.Enabled = true ;
+                }
+            }
+        }
 
         public Wabash ()
         {
@@ -43,7 +68,9 @@ namespace ArkaneSystems.Wabash
             }
         }
 
-        private void notifyIcon_MouseDoubleClick (object sender, MouseEventArgs e) => this.Show () ;
+        private void notifyIcon_MouseDoubleClick (object sender, MouseEventArgs e) => this.OpenShell () ;
+
+        private void mniShell_Click(object sender, EventArgs e) => this.OpenShell() ;
 
         private void mniOpen_Click (object sender, EventArgs e) => this.Show () ;
 
@@ -99,5 +126,25 @@ kill -TERM <pid>" ;
         }
 
         private void Wabash_Shown (object sender, EventArgs e) => this.Hide () ;
+
+        [Dispatched]
+        private void OpenShell ()
+        {
+            if (this.Shell == null)
+                return ;
+
+            // Start the shell process.
+            Process.Start(new ProcessStartInfo
+            {
+                FileName =
+                                                  Path.Combine(
+                                                                Environment.GetFolderPath(
+                                                                                           Environment.SpecialFolder
+                                                                                                      .System),
+                                                                Wabash.WslProcess),
+                Arguments = $"~ -c \"{this.Shell} -l\"",
+                UseShellExecute = true
+            });
+        }
     }
 }
