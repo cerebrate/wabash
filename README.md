@@ -27,7 +27,11 @@ Then, go to the wabash directory (in the case of a chocolatey install, this is _
 
     sudo dpkg -i wabashd_4_wsl.deb
     
-to install the wabashd pseudo-daemon. This works together with wabash.exe for Windows to keep your WSL session going. If that's not installed, wabash plain won't work. **Note that if you have been using a previous version of wabash using an earlier wabashd version, you must update to the supplied latest version of the .deb package.**
+to install the wabashd pseudo-daemon. This works together with wabash.exe for Windows to keep your WSL session going. If that's not installed, wabash plain won't work.
+
+**Note that if you have been using a previous version of wabash using an earlier wabashd version, you must update to the supplied latest version of the .deb package.**
+
+**Note that wabashd is compiled against the default *xenial* mono; if you're still on *trusty* - i.e., installed WSL before build 14936 and have not manually upgraded with `do-release-upgrade` - you will need to upgrade to *xenial* to run wabashd. If you are unsure which you're on, run `lsb_release -a` and check that the release number is 16.04 or higher.**
 
 ## If you intend to use the service-starting functionality of wabashd, you must edit your /etc/sudoers file with _visudo_ , to include the line: 
 
