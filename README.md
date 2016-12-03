@@ -23,11 +23,9 @@ First, either
  * download the release file, and unzip it into a permanent home somewhere on your hard drive, accessible from WSL; OR
  * Install the _wabash_ package using [chocolatey](http://chocolatey.org).
 
-Then, go to the wabash directory (in the case of a chocolatey install, this is _ProgramData\chocolatey\lib\wabash\tools_ ) from a WSL shell, and run:
+Then, install the wabashd pseudo-daemon from the _wsl-translinux_ apt repository, using _apt-get install wabash_ ; if you have not installed packages from the _wsl-translinux_ repository before, you will need to edit your _/etc/apt/sources.list_ file to enable it following [the instructions here](https://github.com/cerebrate/wsl-translinux).
 
-    sudo dpkg -i wabashd_4_wsl.deb
-    
-to install the wabashd pseudo-daemon. This works together with wabash.exe for Windows to keep your WSL session going. If that's not installed, wabash plain won't work.
+This works together with wabash.exe for Windows to keep your WSL session going. If that's not installed, wabash plain won't work.
 
 **Note that if you have been using a previous version of wabash using an earlier wabashd version, you must update to the supplied latest version of the .deb package.**
 
