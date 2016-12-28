@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/bs7qtn3wh1qj4em2?svg=true)](https://ci.appveyor.com/project/cerebrate/wabash)
+
 [![Join the chat at https://gitter.im/wabash-wsl/Lobby](https://badges.gitter.im/wabash-wsl/Lobby.svg)](https://gitter.im/wabash-wsl/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A utility to hold a WSL session-set open continuously. Works in conjunction with wabashd.
