@@ -41,7 +41,11 @@ This permits wabashd to start the services as root without you having to type th
 
 ## Starting services
 
-The services started by wabashd are defined in the wabashd.exe.config file in the same folder as wabashd.exe, in the following section:
+The services started by wabashd are defined in the wabashd.exe.config file in the same folder as wabashd.exe, 
+
+**WARNING: Chocolatey creates shim executables to point at the actual executables of programs installed through it to avoid having to list 17 zillion directories on your PATH. Thus, the wabash.exe you're looking for is NOT the one in _\ProgramData\chocolatey\bin_, but the one in _\ProgramData\chocolatey\lib\wabash\tools_.**
+
+in the following section:
 
     <applicationSettings>
       <ArkaneSystems.Wabash.Properties.Settings>
