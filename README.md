@@ -25,7 +25,7 @@ First, either
  * download the release file, and unzip it into a permanent home somewhere on your hard drive, accessible from WSL; OR
  * Install the _wabash_ package using [chocolatey](http://chocolatey.org).
 
-Then, install the wabashd pseudo-daemon from the _wsl-translinux_ apt repository, using _apt-get install wabash_ ; if you have not installed packages from the _wsl-translinux_ repository before, you will need to edit your _/etc/apt/sources.list_ file to enable it following [the instructions here](https://github.com/cerebrate/wsl-translinux).
+Then, install the wabashd pseudo-daemon from the _wsl-translinux_ apt repository, using _apt-get install wabashd_ ; if you have not installed packages from the _wsl-translinux_ repository before, you will need to edit your _/etc/apt/sources.list_ file to enable it following [the instructions here](https://github.com/cerebrate/wsl-translinux).
 
 This works together with wabash.exe for Windows to keep your WSL session going. If that's not installed, wabash plain won't work.
 
