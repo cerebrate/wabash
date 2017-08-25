@@ -27,6 +27,10 @@ First, either
 
 Then, install the wabashd pseudo-daemon from the _wsl-translinux_ apt repository, using _apt-get install wabashd_ ; if you have not installed packages from the _wsl-translinux_ repository before, you will need to edit your _/etc/apt/sources.list_ file to enable it following [the instructions here](https://github.com/cerebrate/wsl-translinux).
 
+(An alternative to the default wabashd, which requires mono as a prerequisite, is the _wabashd-shell_ package available in the same repository. This is an independently developed wabashd written in bash script, and as such has no dependency on mono.
+
+It can be installed in place of, and should work identically to, the _wabashd_ package. For more information and support, please see its repository at https://github.com/alternize/wabashd-shell .)
+
 This works together with wabash.exe for Windows to keep your WSL session going. If that's not installed, wabash plain won't work.
 
 **Note that if you have been using a previous version of wabash using an earlier wabashd version, you must update to the supplied latest version of the .deb package.**
